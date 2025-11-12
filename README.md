@@ -1,4 +1,4 @@
-# discord-bot
+# INSTRUCTION!!!!!!!!!!!!!!
 
 ## dependencies
 > npm i discord.js
