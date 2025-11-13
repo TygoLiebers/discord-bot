@@ -2,12 +2,12 @@ const { Client: DiscordClient, IntentsBitField } = require('discord.js');
 const { joinVoiceChannel, createAudioPlayer } = require('@discordjs/voice');
 const play = require('play-dl')
 
-const { token } = require('../token.js'); // your Discord token
+const { token } = require('../token.js'); // your discord token
 
 var connection = null
 var player = createAudioPlayer();
 
-// Discord client setup
+// discord client setup
 const discordClient = new DiscordClient({
   intents: [
     IntentsBitField.Flags.Guilds,
@@ -34,7 +34,7 @@ discordClient.on('messageCreate', (message) => {
 discordClient.on('messageCreate', (message) => {
     if (message.content === '!join') {
         const voiceChannel = message.member.voice.channel;
-        if (!voiceChannel) return message.reply("bro WHERE ARE YOU");
+        if (!voiceChannel) return message.reply("cannot find what voice channel youre in");
 
         connection = joinVoiceChannel({
             channelId: voiceChannel.id,
@@ -48,7 +48,7 @@ discordClient.on('messageCreate', (message) => {
 discordClient.on('messageCreate', async (message) => {
   if (message.content.startsWith('!play')) {
     const url = message.content.split(' ')[1];
-    if (!url) return message.reply("add a url man");
+    if (!url) return message.reply("add a url");
 
     playAudio(url);
   }
