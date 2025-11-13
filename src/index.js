@@ -1,5 +1,5 @@
 const { Client: DiscordClient, IntentsBitField } = require('discord.js');
-const { joinVoiceChannel, createAudioPlayer } = require('@discordjs/voice');
+const { joinVoiceChannel, createAudioPlayer, createAudioResource } = require('@discordjs/voice');
 const play = require('play-dl')
 
 const { token } = require('../token.js'); // your discord token
@@ -47,20 +47,14 @@ discordClient.on('messageCreate', (message) => {
 //play audio
 discordClient.on('messageCreate', async (message) => {
   if (message.content.startsWith('!play')) {
-    const url = message.content.split(' ')[1];
-    if (!url) return message.reply("add a url");
-
-    playAudio(url);
+    playAudio();
   }
 });
 
-async function playAudio(url) {
-    console.log(url)
-    const stream = await play.stream(url);
-    const resource = createAudioResource(stream.stream, { inputType: stream.type });
-
-    connection.subscribe(player);
+async function playAudio() {
+    const resource = createAudioResource('../bird.mp3');
     player.play(resource);
+    connection.subscribe(player);
 }
 
 discordClient.login(token);
